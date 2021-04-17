@@ -7,7 +7,7 @@ public class GameField {
     private final int y;
     private final char[][] field;
     private final char wall = '#';
-    private final Item item;
+    private final Dots dots;
 
     /**
      * Vytvori a inicializuje hracie pole
@@ -17,7 +17,7 @@ public class GameField {
         this.y = 10;
         this.field = new char[this.x][this.y];
         this.wallColumns();
-        this.item = new Item(this);
+        this.dots = new Dots(this);
     }
 
     /**
@@ -64,8 +64,8 @@ public class GameField {
                 if (this.field[i][j] != 0) {
                     System.out.printf("%2s", this.field[i][j]); // для занятых ячеек
                 } else {
-                    if (this.item.getItemField(i, j) != 0) {
-                        System.out.printf("%2s", this.item.getItemField(i, j));
+                    if (this.dots.getDotsFieldValue(i, j) != 0) {
+                        System.out.printf("%2s", this.dots.getDotsFieldValue(i, j));
                     } else {
                         System.out.printf("%2s", "");  // для свободных ячеек
                     }
@@ -130,7 +130,7 @@ public class GameField {
      * Getter pre pole bodok
      * @return udaje pola bodok
      */
-    public Item getItem() {
-        return this.item;
+    public Dots getDots() {
+        return this.dots;
     }
 }

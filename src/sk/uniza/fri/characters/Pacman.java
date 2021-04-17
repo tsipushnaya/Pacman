@@ -22,7 +22,7 @@ public class Pacman extends AbstractCharacter {
     @Override
     public void setStartPosition() {
         this.setPosition(new Position(4, 5));
-        this.getField().getItem().setPacmanOnPosition(this.getPosition());
+        this.getField().getDots().setPacmanOnPosition(this.getPosition());
     }
 
     /**
@@ -41,7 +41,7 @@ public class Pacman extends AbstractCharacter {
         }
         if (newPosition != null) {
             this.setPosition(newPosition);
-            this.getField().getItem().setPacmanOnPosition(this.getPosition());
+            this.getField().getDots().setPacmanOnPosition(this.getPosition());
         }
     }
 
@@ -52,7 +52,6 @@ public class Pacman extends AbstractCharacter {
      */
     private Position chooseDirection() throws Exception {
         Destination destination = null;
-        Position newPosition;
         Scanner scan = new Scanner(System.in);
         do {
             System.out.println("What direction do you choose?");
@@ -68,7 +67,7 @@ public class Pacman extends AbstractCharacter {
                 case "EXIT" -> this.exit();
             }
         } while (destination == null);
-        newPosition = destination.changePosition(this.getPosition());
+        Position newPosition = destination.changePosition(this.getPosition());
 
         if (this.getField().isWall(newPosition)) {
             throw new Exception ("You couldn't move in this direction. There is wall.");

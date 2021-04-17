@@ -2,36 +2,36 @@ package sk.uniza.fri.field;
 
 import sk.uniza.fri.characters.position.Position;
 
-public class Item {
+public class Dots {
     private final GameField gameField;
-    private final char[][] itemField;
+    private final char[][] dotsField;
 
     /**
      * Inicializuje a nastavuje pole bodok v suvislosti s hracim polem
      * @param gameField je aktualne hracie pole pre ktore nastavujeme bodky
      */
-    public Item(GameField gameField) {
+    public Dots(GameField gameField) {
         this.gameField = gameField;
         int x = gameField.getX();
         int y = gameField.getY();
-        this.itemField = new char[x][y];
-        this.drawItemField();
+        this.dotsField = new char[x][y];
+        this.drawDotsField();
     }
 
     /**
      * Pridava hodnoty prvkam pola
      */
-    public void drawItemField() {
-        for (int i = 0; i < this.itemField.length; i++) {
-            for (int j = 0; j < this.itemField[i].length; j++) {
+    public void drawDotsField() {
+        for (int i = 0; i < this.dotsField.length; i++) {
+            for (int j = 0; j < this.dotsField[i].length; j++) {
 
-                if (i == 0 || i == this.itemField.length - 1 ||
-                        j == 0 || j == this.itemField.length - 1) {
-                    this.itemField[i][j] = 0;
+                if (i == 0 || i == this.dotsField.length - 1 ||
+                        j == 0 || j == this.dotsField.length - 1) {
+                    this.dotsField[i][j] = 0;
                 } else if (this.gameField.isWall(new Position(i, j))) {
-                    this.itemField[i][j] = 0;
+                    this.dotsField[i][j] = 0;
                 } else {
-                    this.itemField[i][j] = '.';
+                    this.dotsField[i][j] = '.';
                 }
 
             }
@@ -44,8 +44,8 @@ public class Item {
      * @param y je cislo stlpcu
      * @return hodnotu prvka pola
      */
-    public char getItemField(int x, int y) {
-        return this.itemField[x][y];
+    public char getDotsFieldValue(int x, int y) {
+        return this.dotsField[x][y];
     }
 
     /**
@@ -53,7 +53,7 @@ public class Item {
      * @param position je pozicia Pakmana v poli
      */
     public void setPacmanOnPosition(Position position) {
-        this.itemField[position.getX()][position.getY()] = 0;
+        this.dotsField[position.getX()][position.getY()] = 0;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Item {
      * @return true, ak ano, inak false
      */
     public boolean isEmpty() {
-        for (char[] rows : this.itemField) {
+        for (char[] rows : this.dotsField) {
             for (char column : rows) {
                 if (column != 0) {
                     return false;

@@ -78,16 +78,17 @@ public class Game {
             for (ICharacter character : this.characters.values()) {
                 character.step();
                 helpArray.addAll(this.meetCharacters());
-
-                if (!helpArray.contains(character)) {
-                    this.field.setCharacterPosition(character.getPosition(), character.getName());
-                }
             }
 
             for (ICharacter character : helpArray) {
                 if (this.characters.containsKey(character.getName())) {
                     this.removeCharacter(character);
+                    this.forRemove.remove(character);
                 }
+            }
+
+            for (ICharacter character : this.characters.values()) {
+                this.field.setCharacterPosition(character.getPosition(), character.getName());
             }
 
             this.field.drawField();
@@ -147,7 +148,7 @@ public class Game {
             System.out.println("********************");
 
             return true;
-        } else if (this.field.getItem().isEmpty()) {
+        } else if (this.field.getDots().isEmpty()) {
             System.out.println();
             System.out.println("********************");
             System.out.println("GAME OVER. YOU WIN!!");
